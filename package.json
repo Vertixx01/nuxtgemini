@@ -2,9 +2,10 @@
   "name": "nuxt-app",
   "private": true,
   "type": "module",
+  "packageManager": "yarn@3.6.4",
   "scripts": {
     "build": "nuxt build",
-    "dev": "HOST=0.0.0.0 nuxt dev",
+    "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -14,11 +15,11 @@
     "@headlessui/vue": "^1.7.19",
     "@heroicons/vue": "^2.1.1",
     "@pinia/nuxt": "^0.5.1",
+    "estree-walker": "^3.0.3",
     "nuxt": "^3.14.1592",
     "pinia": "^2.1.7",
     "postgres": "^3.4.5",
-    "sqlite3": "^5.1.7",
-    "vue": "^3.5.13"
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.11.4",
