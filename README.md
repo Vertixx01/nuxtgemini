@@ -287,6 +287,7 @@ Run nuxtgemini using the following command:
 ## 🙌 Acknowledgments
 
 - **[Vertixx01](https://github.com/Vertixx01)**: For creating this project.
+- **[Faetalize](https://github.com/Faetalize)**: For inspiring and motivating me to create this project.
 - Hopefully, this project will be useful to you.
 
 ---

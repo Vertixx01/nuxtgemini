@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS personalities (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  personality_name TEXT NOT NULL,
+  personality_description TEXT,
+  personality_image_url TEXT,
+  personality_prompt TEXT,
+  username TEXT
+);

@@ -2,7 +2,7 @@
   <div class="w-80 glass-effect p-4 flex flex-col gap-4">
     <div class="flex items-center gap-2 mb-6">
       <img src="~/public/logo.png" alt="Nuxt AI Chat Logo" class="w-10 h-10">
-      <h1 class="text-xl font-semibold text-neon-green text-center">NuxtGemini</h1>
+      <h1 class="text-xl font-semibold text-neon-green">NuxtGemini</h1>
     </div>
 
     <!-- Sections -->

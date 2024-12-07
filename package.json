@@ -10,15 +10,20 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "nuxt": "^3.13.2",
     "@google/generative-ai": "^0.2.1",
     "@headlessui/vue": "^1.7.19",
     "@heroicons/vue": "^2.1.1",
+    "@nuxtjs/composition-api": "^0.34.0",
     "@pinia/nuxt": "^0.5.1",
-    "pinia": "^2.1.7"
+    "nuxt": "^3.14.1592",
+    "pinia": "^2.1.7",
+    "postgres": "^3.4.5",
+    "sqlite3": "^5.1.7",
+    "vue": "^3.5.13"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.11.4",
-    "@tailwindcss/forms": "^0.5.7"
+    "@tailwindcss/forms": "^0.5.7",
+    "vue": "^3.5.13"
   }
 }
