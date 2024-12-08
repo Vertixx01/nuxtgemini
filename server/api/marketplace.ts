@@ -1,24 +1,30 @@
-import sqlite3 from 'sqlite3';
+import { createClient } from '@supabase/supabase-js';
 
-const db = new sqlite3.Database('./db.sqlite', (err) => {
-  if (err) {
-    console.error('Could not connect to database', err);
-  } else {
-    console.log('Connected to SQLite database');
-  }
-});
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_KEY;
+
+if (!supabaseUrl || !supabaseKey) {
+  throw new Error('Missing Supabase environment variables');
+}
+
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default eventHandler(async (event) => {
   if (event.req.method === 'GET') {
-    return new Promise((resolve, reject) => {
-      db.all('SELECT * FROM personalities', [], (err, rows) => {
-        if (err) {
-          console.error('Error fetching data', err);
-          reject({ error: 'Failed to fetch data' });
-        } else {
-          resolve(rows);
-        }
+    try {
+      const { data, error } = await supabase
+        .from('personalities')
+        .select('*');
+
+      if (error) throw error;
+
+      return data;
+    } catch (err) {
+      console.error('Error fetching data', err);
+      throw createError({
+        statusCode: 500,
+        statusMessage: 'Failed to fetch personalities'
       });
-    });
+    }
   }
 });

@@ -165,7 +165,6 @@ watch(() => personalitiesStore.editingPersonality, (newId) => {
 const fetchPersonalities = async () => {
   try {
     const response = await axios.get('/api/marketplace')
-    //const response = await axios.post('/api/clear')
     personalities.value = response.data
   } catch (error) {
     console.error('Error fetching personalities:', error)
@@ -210,6 +209,7 @@ const savePersonality = () => {
 const uploadToMarketplace = async () => {
   try {
     const marketplaceData = {
+      id: Date.now().toString(),
       personality_name: form.name,
       personality_description: form.description,
       personality_image_url: form.imageUrl,
