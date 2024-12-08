@@ -2,17 +2,12 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: false },
-  modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', 'nuxt-security'],
+  modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt'],
   imports: {
     dirs: ['composables']
   },
-  security: {
-    strict: true,
-    headers: {
-      crossOriginResourcePolicy: 'same-origin',
-      crossOriginOpenerPolicy: 'same-origin',
-      crossOriginEmbedderPolicy: 'credentialless',
-    },
+  routeRules: {
+    '/api/**': { cors: true }
   },
   css: ['~/assets/css/main.css'],
   app: {
