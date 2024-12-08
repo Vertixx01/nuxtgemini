@@ -2,7 +2,7 @@
   "name": "nuxt-app",
   "private": true,
   "type": "module",
-  "packageManager": "yarn@3.6.4",
+  "packageManager": "bun@1.0.11",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -20,6 +20,7 @@
     "axios": "^1.7.9",
     "estree-walker": "^3.0.3",
     "nuxt": "^3.14.1592",
+    "nuxt-security": "2.1.5",
     "pinia": "^2.1.7",
     "postgres": "^3.4.5",
     "sqlite3": "^5.1.7"
