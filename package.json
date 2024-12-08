@@ -15,6 +15,8 @@
     "@headlessui/vue": "^1.7.19",
     "@heroicons/vue": "^2.1.1",
     "@pinia/nuxt": "^0.5.1",
+    "@nuxt/kit": "3.14.1592",
+    "axios": "^1.7.9",
     "estree-walker": "^3.0.3",
     "nuxt": "^3.14.1592",
     "pinia": "^2.1.7",

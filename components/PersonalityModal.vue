@@ -54,6 +54,19 @@
                   <textarea v-model="form.prompt" required class="w-full bg-win11-hover border-gray-700 rounded-lg" rows="4"></textarea>
                 </div>
 
+                <div>
+                  <label class="block text-sm font-medium mb-1">Username</label>
+                  <input v-model="form.username" type="text" class="w-full bg-win11-hover border-gray-700 rounded-lg" />
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium mb-1">Upload to Marketplace</label>
+                  <select v-model="form.uploadToMarketplace" class="w-full bg-win11-hover border-gray-700 rounded-lg">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                  </select>
+                </div>
+
                 <div class="flex justify-end gap-2">
                   <button type="button" @click="closeModal" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded-lg">
                     Cancel
@@ -92,6 +105,16 @@
       </div>
     </Dialog>
   </TransitionRoot>
+  <div 
+  v-if="showToast" 
+  :class="{
+    'bg-green-500 text-white': toastType === 'success', 
+    'bg-red-500 text-white': toastType === 'error'
+  }" 
+  class="fixed top-4 right-4 z-50 px-4 py-2 rounded-lg shadow-lg transition-all duration-300 ease-in-out"
+>
+  {{ toastMessage }}
+</div>
 </template>
 
 <style scoped>
@@ -116,12 +139,17 @@ const isOpen = computed(() => personalitiesStore.isModalOpen)
 const editing = computed(() => personalitiesStore.editingPersonality !== null)
 const activeSection = ref('add')
 const personalities = ref([])
+const toastMessage = ref('')
+const toastType = ref('')
+const showToast = ref(false)
 
 const form = reactive({
   name: '',
   description: '',
   imageUrl: '',
-  prompt: ''
+  prompt: '',
+  username: '',
+  uploadToMarketplace: 'false'
 })
 
 // Load existing personality data when editing
@@ -136,7 +164,8 @@ watch(() => personalitiesStore.editingPersonality, (newId) => {
 
 const fetchPersonalities = async () => {
   try {
-    const response = await axios.get('/api/personalities')
+    const response = await axios.get('/api/marketplace')
+    //const response = await axios.post('/api/clear')
     personalities.value = response.data
   } catch (error) {
     console.error('Error fetching personalities:', error)
@@ -153,7 +182,8 @@ const closeModal = () => {
     name: '',
     description: '',
     imageUrl: '',
-    prompt: ''
+    prompt: '',
+    uploadToMarketplace: 'false'
   })
 }
 
@@ -168,8 +198,32 @@ const savePersonality = () => {
       id: Date.now().toString(),
       ...form
     })
+
+    // Check if user wants to upload to marketplace
+    if (form.uploadToMarketplace === 'true') {
+      uploadToMarketplace()
+    }
   }
   closeModal()
+}
+
+const uploadToMarketplace = async () => {
+  try {
+    const marketplaceData = {
+      personality_name: form.name,
+      personality_description: form.description,
+      personality_image_url: form.imageUrl,
+      personality_prompt: form.prompt,
+      username: form.username
+    }
+
+    const response = await axios.post('/api/upload', marketplaceData)
+    if (response.data.message) {
+      alert(response.data.message)
+    }
+  } catch (error) {
+    console.error('Marketplace upload error:', error);
+  }
 }
 
 const exportPersonality = () => {
